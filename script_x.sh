@@ -22,7 +22,7 @@ fi
 
 # Осуществляет проверку наличия прав чтения для всех вложенных директорий в указанной входной директории.
 # Выводит соответствующее предупреждение, если нет прав доступа к любой из директорий.
-find "$input_dir" -type d | while read dir; do
+find "$input_dir" -type d | while read -r dir; do
     if [[ ! -r $dir ]]; then
         echo "Нет прав доступа к директории $dir. Используйте sudo или проверьте права."
     fi
@@ -33,7 +33,7 @@ mkdir -p "$output_dir"
 
 # Поиск всех файлов в входной директории и их копирование в выходную директорию
 # Уникальное имя файла создается при обнаружении совпадения имен
-find "$input_dir" -type f | while read file; do
+find "$input_dir" -type f | while read -r file; do
     base_name=$(basename "$file")
     output_file="$output_dir/$base_name"
     c=1
